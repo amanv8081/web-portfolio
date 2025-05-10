@@ -1,0 +1,261 @@
+:root {
+    --primary: #6e45e2;
+    --secondary: #88d3ce;
+    --accent: #ff7e5f;
+    --dark: #0f0c29;
+    --light: #f8f9fa;
+    --glass: rgba(255, 255, 255, 0.1);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--dark), #000000, #24243e);
+    font-family: 'Poppins', sans-serif;
+    color: var(--light);
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Particle Background */
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    top: 0;
+    left: 0;
+}
+
+/* Main Content */
+.main-container {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+/* Neon Text Effect */
+.neon-text {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: clamp(2rem, 8vw, 6rem);
+    letter-spacing: 0.5rem;
+    color: transparent;
+    -webkit-text-stroke: 2px var(--accent);
+    position: relative;
+    margin: 0;
+    line-height: 1.2;
+    animation: neonGlow 2s infinite alternate;
+}
+
+.neon-text::before {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: var(--accent);
+    text-shadow: 0 0 10px var(--accent), 
+                 0 0 20px var(--accent), 
+                 0 0 30px var(--accent);
+    z-index: -1;
+    opacity: 0;
+    animation: neonFlicker 3s infinite;
+}
+
+/* Gradient Text */
+.gradient-text {
+    background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+}
+
+/* Interactive Button */
+.btn-neon {
+    position: relative;
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    margin: 2rem 0;
+    color: var(--light);
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    border: none;
+    border-radius: 50px;
+    background: transparent;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.btn-neon:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.btn-neon::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, var(--primary), var(--accent));
+    z-index: -1;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+.btn-neon::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, var(--accent), var(--primary));
+    z-index: -2;
+    border-radius: 50px;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.btn-neon:hover::before {
+    opacity: 0;
+}
+
+.btn-neon:hover::after {
+    opacity: 1;
+}
+
+/* Floating Elements */
+.floating {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.3;
+    z-index: -1;
+    animation: float 15s infinite ease-in-out;
+}
+
+.floating-1 {
+    width: 300px;
+    height: 300px;
+    background: var(--primary);
+    top: 20%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.floating-2 {
+    width: 200px;
+    height: 200px;
+    background: var(--accent);
+    bottom: 15%;
+    right: 10%;
+    animation-delay: 2s;
+}
+
+.floating-3 {
+    width: 150px;
+    height: 150px;
+    background: var(--secondary);
+    top: 60%;
+    left: 20%;
+    animation-delay: 4s;
+}
+
+/* Text Animation */
+.text-animate {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1s forwards;
+}
+
+.text-animate:nth-child(1) { animation-delay: 0.3s; }
+.text-animate:nth-child(2) { animation-delay: 0.6s; }
+.text-animate:nth-child(3) { animation-delay: 0.9s; }
+.text-animate:nth-child(4) { animation-delay: 1.2s; }
+
+/* Cursor Effect */
+.cursor {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgba(255, 126, 95, 0.7);
+    pointer-events: none;
+    mix-blend-mode: screen;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease;
+}
+
+.cursor-follower {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border: 2px solid rgba(255, 126, 95, 0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
+}
+
+/* Animations */
+@keyframes neonGlow {
+    from {
+        text-shadow: 0 0 5px var(--accent), 0 0 10px var(--accent);
+    }
+    to {
+        text-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent), 0 0 30px var(--accent);
+    }
+}
+
+@keyframes neonFlicker {
+    0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+        opacity: 0.7;
+    }
+    20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+        opacity: 0.2;
+    }
+}
+
+@keyframes float {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(50px, 50px) rotate(180deg); }
+    100% { transform: translate(0, 0) rotate(360deg); }
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .neon-text {
+        font-size: clamp(1.5rem, 6vw, 4rem);
+        letter-spacing: 0.3rem;
+    }
+    
+    .btn-neon {
+        padding: 0.8rem 2rem;
+        font-size: 1rem;
+    }
+}
